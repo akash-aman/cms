@@ -10,7 +10,7 @@ A blog📃 application with all CRUD funtionality🚀 along with markdown suppor
 - NEXT JS 🖤 provide this feature 🎉 out of the box.
 - I have build a dashboard📺 with google authentications🔐 for CRUD application.
 - Implemented tags🏷️ & category sections for more fine search🔍.
-- [***BACKEND***]()🤖 is also designed using ***NODE.JS*** supporting all ***GraphQL*** ⚛️. 
+- [***BACKEND***]()🤖 is also designed using ***NODE.JS*** supporting ***GraphQL*** API interface ⚛️. 
 
 
 ## How to run 
