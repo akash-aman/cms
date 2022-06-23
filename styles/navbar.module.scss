@@ -1,0 +1,186 @@
+@use 'sass:map';
+$iconColor: (
+  icon1: (from:#00b09b,to:#96c93d,hoverFrom:#fb923c,hoverTo:#db2777 ,secondary:#fb923c ),
+  icon2: (from:#4ade80,to:#06b6d4,hoverFrom:#d946ef,hoverTo:#9333ea, secondary:#00b09b),
+  icon3: (from:#22d3ee,to:#0ea5e9,hoverFrom:#ec4899,hoverTo:#f43f5e, secondary:#00b09b),
+  icon4: (from:#d946ef,to:#9333ea,hoverFrom:#4ade80,hoverTo:#06b6d4, secondary:#00b09b),
+  icon5: (from:#00b09b,to:#96c93d,hoverFrom:#fb923c,hoverTo:#db2777, secondary:#00b09b),
+
+);
+
+
+@mixin iconGrad($iconColor) {
+  background:#{map.get($namedTag,color)};
+  color: map.get($namedTag,text);
+}
+
+@each $name, $icon in $iconColor{
+  .navbarItem {
+    .#{$name}From{
+      stop-color: map.get($icon,from);
+      stop-opacity: 1;
+      transition: all 0.3s linear;
+    }
+    
+    
+    .#{$name}Sec{
+      color: map.get($icon,secondary);
+    }
+
+    .#{$name}To{
+      stop-color: map.get($icon,to);
+      stop-opacity: 1;
+      transition: all 0.3s linear;
+    }
+
+    &:hover{
+      .#{$name}From{
+        stop-color: map.get($icon,hoverFrom); 
+        stop-opacity: 1;
+      }
+      
+      .#{$name}To{
+        stop-color: map.get($icon,hoverTo);
+        stop-opacity: 1;
+      }
+    }
+  }
+}
+
+
+.navbar {
+  min-height: 45rem;
+  //padding-top: 2rem;
+  z-index: 999;
+  width: var(--nav-width);
+  height: 100vh;
+  position: fixed;
+  background-color: var(--nav-bg);
+  box-shadow: var(--nav-shadow);
+  display: grid;
+  grid-template-rows: repeat(10, 80px);
+  align-items: center;
+  justify-items: center;
+  
+  .navbarItem {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-auto-flow: column;
+    cursor:pointer;
+ 
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    .logo {
+      width: 4rem;
+      height: 3rem;
+    }
+  }
+  img{
+    border-radius: 50%;
+  }
+}
+}
+
+.navbarItem {
+  position: relative;
+  .primary {
+   color: var(--icon-p);
+
+  }
+
+  .secondary {
+   color: hsl(21, 95%, 70%);//      //var(--icon-s);
+  }
+
+ 
+
+  .primary,
+  .secondary {
+    transition: var(--transition-speed);
+  }
+  .span {
+    justify-self: left;
+    padding: 0.35rem;
+    border-radius: 5px;
+    position: absolute;
+    background-color: var(--text-color);
+    color: var(--background);
+    transform: scale(0) translateX(0);
+    transition: all 0.3s ease-in;
+    font-family: "MyWebFont";
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  &:hover {
+  
+
+    .span {
+      transform: scale(1) translateX(4rem);
+      transition: all 0.01s linear;
+    }
+    .primary {
+      //color: var(--text-color);
+      color: var(--orange);
+      transition: var(--transition-speed);
+    }
+
+    .secondary {
+      //  color: var(--h-color);
+      color: var(--orange-light);
+      transition: var(--transition-speed);
+    }
+  }
+
+  .primaryUI {
+    color: var(--icon-p);
+  }
+
+  .secondaryUI {
+    color: var(--icon-s);
+  }
+
+  .primaryUI,
+  .secondaryUI {
+    transition: var(--transition-speed);
+  }
+
+  &:hover {
+    .primaryUI {
+      color: var(--text-color);
+      //color: var(--orange);
+      transition: var(--transition-speed);
+    }
+
+    .secondaryUI {
+      color: var(--h-color);
+      //color: var(--orange-light);
+      transition: var(--transition-speed);
+    }
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .navbar {
+   border-radius: 20px 20px 0 0;
+    bottom:0;
+    padding:0 1rem;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(6 , 1fr);
+     justify-content: space-evenly;
+    height: calc(var(--nav-width) + 1.5rem);
+     width: calc(100% - 2rem);
+     min-height: 0;
+     .navbarItem{
+       .span{
+         display: none;
+       }
+     }
+  }
+}
+

@@ -1,0 +1,124 @@
+// .wrapper {
+
+//     display: grid;
+//     gap: 3rem;
+
+//     // grid-template-columns: 5fr 1fr;
+
+
+
+
+//     .toc {
+// top: 4rem;
+// padding-top: 1rem;
+// padding-bottom: 1rem;
+
+// position: sticky;
+//transform: translateX(4.2rem);
+
+
+//         height: calc(100vh - 14rem);
+
+//         .ul {
+//             //background-color: rgba(27, 27, 27, 0.575);
+//             list-style: none;
+//             overflow-y: auto;
+//             overflow-x: auto;
+//             scrollbar-width: none;
+//             height: calc(100vh - 16rem);
+
+//             &::-webkit-scrollbar {
+//                 display: none;
+//             }
+
+//         }
+
+//     }
+
+//     padding: 0rem;
+
+//     // @media only screen and (max-width:1100px) {
+//     //     padding: 0;
+//     //     grid-auto-flow: row;
+//     //     grid-template-columns: 1fr;
+
+//     //     aside {
+//     //         grid-row: 1/2;
+//     //     }
+//     // }
+
+
+// }
+
+
+
+.wrapper {
+
+    img {
+        background: #ebebebab;
+        width: 100%;
+    }
+
+    display: grid;
+    gap: 3rem;
+    padding: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(700px, 5.5fr) minmax(300px, 2fr));
+
+    @media only screen and (max-width: 1100px) {
+        grid-template-columns: 100%;
+        grid-template-rows: auto auto;
+        padding-left: 0rem;
+        padding-right: 0rem;
+        height: max-content;
+
+        .toc {
+            grid-row: 1/2;
+        }
+
+        .content {
+
+            ul,
+            ol {
+                padding-left: 1.3rem;
+            }
+
+
+        }
+    }
+
+    @media only screen and (min-width: 1101px) {
+        .toc {
+            position: sticky;
+            position: -webkit-sticky;
+            top: 5rem;
+            height: calc(100vh - 12rem);
+            padding: 1rem;
+            background-color: var(--nav-bg);
+            box-shadow: var(--toc-shadow);
+        }
+    }
+
+    .toc {
+        overflow: auto;
+
+        padding: 1rem;
+        background-color: var(--nav-bg);
+        box-shadow: var(--toc-shadow);
+        border-radius: 3px;
+        border-radius: 20px;
+        background-blend-mode: var(--blend-mode);
+        background: linear-gradient(45deg, var(--gradient-9));
+        background-color: var(--blend-color);
+        scrollbar-width: none;
+
+        .ul {
+            color: var(--text-color1);
+
+
+        }
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}

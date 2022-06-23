@@ -1,0 +1,74 @@
+.login {
+  height: calc(100vh - 10rem);
+  padding: 5rem;
+  color: aqua;
+  // background-color:var(--background);
+  grid-auto-flow: column;
+  grid-template-columns: minmax(450px, 1.5fr) 3fr;
+  display: grid;
+  border-radius: 10px;
+  .container1 {
+    justify-content: center;
+    border-radius: 20px 0 0 20px;
+    min-height: fit-content;
+    padding: 8rem 4rem;
+    display: grid;
+    grid-gap: 1rem;
+    grid-auto-flow: row;
+    background: linear-gradient(-45deg, #00b09b, #96c93d);
+
+    @media only screen and (max-width: 768px) {
+      border-radius: 20px 20px 0 0;
+      padding: 8rem 2.5rem;
+    }
+    .socialLogin {
+      height: fit-content;
+      width: fit-content;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      grid-gap: 1rem;
+      button {
+        height: 7rem;
+        width: 7rem;
+        border: none;
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        cursor: pointer;
+        background-color: #faf9f6;
+      }
+      .Google {
+        border-radius: 50% 50% 0 50%;
+      }
+      .Twitter {
+        border-radius: 0 50% 50% 50%;
+      }
+      .Facebook {
+        border-radius: 50% 0 50% 50%;
+      }
+      .GitHub {
+        border-radius: 50% 50% 50% 0;
+      }
+    }
+  }
+  .container2 {
+    background-color: rgb(54, 54, 54);
+    border-radius: 0 20px 20px 0;
+    @media only screen and (max-width: 768px) {
+      border-radius: 0 0 20px 20px;
+    }
+  }
+
+  svg {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    text-align: center;
+  }
+  @media only screen and (max-width: 768px) {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+}

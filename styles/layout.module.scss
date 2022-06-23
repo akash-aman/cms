@@ -1,0 +1,16 @@
+.main {
+  margin-left: var(--nav-width);
+  padding: 2rem 1.2rem 1.2rem 1.2rem;
+  min-height: calc(100vh - 3.6rem);
+  transition: margin 0.3s ease;
+
+}
+
+@media only screen and (max-width: 760px) {
+  .main {
+    margin-left: 0;
+    margin-bottom: calc(var(--nav-width) + 1rem);
+
+
+  }
+}

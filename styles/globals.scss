@@ -1,0 +1,709 @@
+@use 'sass:map';
+@import 'mytheme.scss';
+@import 'katex.scss';
+//-------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------- FONTS ----------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+
+@font-face {
+  font-family: "MyWebFont";
+  // src: url("https://cdn.jsdelivr.net/gh/sirakashaman/fonts@main/Sofia%20Pro%20ExtraLight%20Az.otf");
+  src: url("../fonts/wt-200.woff2");
+  font-weight: 200;
+  font-style: normal;
+}
+
+//light
+@font-face {
+  font-family: "MyWebFont";
+  //  src: url("https://cdn.jsdelivr.net/gh/sirakashaman/fonts@main/Sofia%20Pro%20Light%20Az.otf");
+  src: url("../fonts/wt-300.woff2");
+
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MyWebFont";
+  //  src: url("https://cdn.jsdelivr.net/gh/sirakashaman/fonts@main/Sofia%20Pro%20Regular%20Az.otf");
+  src: url("../fonts/wt-400.woff2");
+
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MyWebFont";
+  // src: url("https://cdn.jsdelivr.net/gh/sirakashaman/fonts@main/Sofia%20Pro%20Medium%20Az.otf");
+  src: url("../fonts/wt-500.woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MyWebFont";
+  //src: url("https://cdn.jsdelivr.net/gh/sirakashaman/fonts@main/Sofia%20Pro%20Black%20Az.otf");
+  src: url("../fonts/wt-900.woff2");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MyWebFont";
+  //src: url("https://cdn.jsdelivr.net/gh/sirakashaman/fonts@main/Sofia%20Pro%20Regular%20Italic%20Az.otf");
+  src: url("../fonts/I-wt-400.woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "MyCodeFont";
+  //src: url("https://cdn.jsdelivr.net/gh/sirakashaman/fonts@main/attribute-mono-400.otf");
+  src: url("../fonts/attribute-mono-400.woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MyCodeFont";
+  //src: url("https://cdn.jsdelivr.net/gh/sirakashaman/fonts@main/attribute-mono-400-italic.otf");
+  src: url("../fonts/attribute-mono-400-italic.woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+html {
+
+  scroll-padding-top: 25px;
+}
+
+body {
+
+  padding: 0;
+  margin: 0;
+  background: var(--background);
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+code {
+  font-family: Roboto, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------ COLOR VARIABLES --------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+
+$colors: (red: hsl(348, 100%, 61%),
+  blue: #498afb,
+  orange: #fa8142,
+  green: #09c372,
+  purple: hsl(265, 50%, 60%),
+  yellow: hsl(48, 100%, 67%),
+  pink: #ff4088,
+);
+
+$namedTags: (angular: (color: #ff3860,
+    text: var(--code-color-1),
+  ),
+  react: (color: #498afb,
+    text: var(--code-color-2),
+  ),
+  typescript: (color: #498afb,
+    text: var(--code-color-2),
+  ),
+  facebook: (color: #498afb,
+    text: var(--code-color-2),
+  ),
+  svelte: (color: #fa8142,
+    text: var(--code-color-3),
+  ),
+  green: (color: rgb(9, 195, 114),
+    text: var(--code-color-4),
+  ),
+  nginx: (color: #09c372,
+    text: var(--code-color-5),
+  ),
+  mongo: (color: #09c372,
+    text: var(--code-color-6),
+  ),
+  purple: (color: #9166cc,
+    text: var(--code-color-7),
+  ),
+  dotnet: (color: #9166cc,
+    text: var(--code-color-8),
+  ),
+  yellow: (color: #ffdd57,
+    text: var(--code-color-9),
+  ),
+  rxjs: (color: #ff4088,
+    text: var(--code-color-10),
+  ),
+  graphql: (color: #ff4088,
+    text: var(--code-color-11),
+  ),
+  scss: (color: #ff4088,
+    text: var(--code-color-12),
+  ),
+);
+
+//-------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------ BUTTON STYLES ----------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+
+@mixin button($color) {
+  border: none;
+  background-color: #{$color};
+  padding: 1rem 2rem;
+  color: var(--gray0);
+  border-radius: 10px;
+  font-family: MyWebFont;
+  font-weight: 800;
+  margin: 2rem;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+@each $name,
+$color in $colors {
+  .btn-#{$name} {
+    @include button($color);
+  }
+
+  .btn-#{$name}-dark {
+    @include button(darken($color, 7%));
+  }
+
+  .btn-#{$name}-light {
+    @include button(lighten($color, 7%));
+  }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------- TAGS STYLES ----------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+
+@mixin tag($namedTag) {
+  background: #{map.get($namedTag, color)};
+  color: map.get($namedTag, text);
+}
+
+@each $name,
+$tag in $namedTags {
+  .#{$name} {
+    @include tag($tag);
+  }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------ DEFAULT THEME ----------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+
+@mixin default-theme {
+  --text-color1: #fff;
+  --text-color2: #fff;
+  --text-color3: #ebebeb;
+  --text-color4: var(--gray3);
+  --background: hsla(210, 11%, 10%, 1);
+  ; //var(--gray6);
+  --text-color: hsla(210, 11%, 71%, 1); //var(--gray2);
+  --h-color: white;
+  --nav-shadow: 4px 0 10px -3px #010101;
+  --top-nav-shadow: 4px 0 8px -3px #01010146;
+  --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.38);
+  --toc-shadow: rgba(0, 0, 0, 0.7) 0px 10px 20px 0px;
+  --nav-bg: var(--gray5);
+  --tag-bg: var(--gray4);
+  --code-bg: #22262f; // #1d2327;
+  --card-bg: var(--gray5);
+  --overlay-bg: rgba(0, 0, 0, 0.9);
+  --h-border: 2px dashed var(--nav-bg);
+  --nav-border: 2px dashed var(--text-color);
+
+  --card-radius: 0.25rem;
+  //transition: all 0.3s ease; // removed due to lazy loading during page refresh
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------- DARK THEMES ----------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+
+.dark-theme {
+  --code-color-1: #a3eea0; //s1
+  --code-color-2: #fdce68; //nl
+  --code-color-3: #ff8276; //nt
+  --code-color-4: #eddc96; //na
+  --code-color-5: #63677e; //c1
+  --code-color-6: #e19ef5; //kr
+  --code-color-7: #dee2f7; //nx
+  --code-color-8: #e19ef5; //kd bold
+  --code-color-9: #fdce68; //nc
+  --code-color-10: #9fadf1; //nf
+  --code-color-11: #dee2f7; //n
+  --code-color-12: #eddc96; //m
+  --code-color-13: #a3eea0; //s
+  --code-color-14: #dee2f7; //o
+
+  --gray-9: hsla(210, 17%, 98%, 1);
+  --gray-8: hsla(210, 16%, 93%, 1);
+  --gray-7: hsla(210, 14%, 89%, 1);
+  --gray-6: hsla(210, 14%, 83%, 1);
+  --gray-5: hsla(210, 11%, 71%, 1);
+  --gray-4: hsla(208, 7%, 46%, 1);
+  --gray-3: hsla(210, 9%, 31%, 1);
+  --gray-2: hsla(210, 10%, 23%, 1);
+  --gray-1: hsla(210, 11%, 15%, 1);
+
+  --editor-p: hsla(210, 11%, 65%, 1);
+  --editor-s: hsla(208, 7%, 46%, 1);
+
+
+  --off-color: rgb(20 25 29);
+  --table-border: #dbe1e829;
+  --icon-p: var(--gray3);
+  --icon-s: var(--gray4);
+  @include default-theme;
+
+  .light-icon {
+    display: block;
+  }
+
+  .dark-icon {
+    display: none;
+  }
+
+
+
+  --blend-mode:darken;
+  --blend-color:hsla(0, 0%, 0%, 0.4);
+
+
+  @each $name,
+  $color in $colors {
+    .btn-#{$name}-ui {
+      @include button(lighten($color, 7%));
+    }
+  }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------- LIGHT THEME ----------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+
+.light-theme {
+  --code-color-1: #68c567; //s1 1
+  --code-color-2: #e66900; //nl 1
+  --code-color-3: #e45649; //nt 1
+  --code-color-4: #bb7512; //na 1
+  --code-color-5: #c9cbd6; //c1 1
+  --code-color-6: #9d5bb1; //kr 1
+  --code-color-7: #574c86; //nx
+  --code-color-8: #db928b; //kd
+  --code-color-9: #6d6a72; //nc
+  --code-color-10: #667efb; //nf 1
+  --code-color-11: #5c669b; //n
+  --code-color-12: #525564; //m
+  --code-color-13: #50a14f; //s
+  --code-color-14: #c2c6da; //o 1
+
+  --gray-1: hsla(210, 17%, 98%, 1);
+  --gray-2: hsla(210, 16%, 93%, 1);
+  --gray-3: hsla(210, 14%, 89%, 1);
+  --gray-4: hsla(210, 14%, 83%, 1);
+  --gray-5: hsla(210, 11%, 71%, 1);
+  --gray-6: hsla(208, 7%, 46%, 1);
+  --gray-7: hsla(210, 9%, 31%, 1);
+  --gray-8: hsla(210, 10%, 23%, 1);
+  --gray-9: hsla(210, 11%, 15%, 1);
+
+  --editor-p: hsla(210, 11%, 65%, 1);
+  --editor-s: hsla(208, 7%, 46%, 1);
+
+  --icon-p: var(--gray2);
+  --icon-s: var(--gray3);
+
+  --text-color1: #4b4b4b;
+  --text-color2: #000;
+  --text-color3: #515151;
+
+  --background: var(--gray0);
+  --text-color: var(--gray4);
+  --h-color: var(--gray6);
+  --nav-shadow: 4px 0 10px -3px #c1c1c1;
+  --top-nav-shadow: 4px 0 8px -3px #c1c1c12f;
+  --card-shadow: 0 4px 8px rgba(0, 30, 84, 0.12);
+  --toc-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px 0px;
+  --nav-bg: white;
+  --tag-bg: var(--gray2);
+  --code-bg: white;
+  --card-bg: white;
+  --overlay-bg: hsla(0, 0%, 94.9%, 0.9); //rgba(255, 255, 255, 0.9);
+  --h-border: 2px dashed var(--gray1);
+  --nav-border: 2px dashed var(--text-color);
+  --table-border: var(--gray1);
+  --off-color: rgb(244 241 241);
+
+  //-------------------------------------------------------------------------------------------------------------------------
+  //------------------------------------------------ TRANSITION UI ICON -----------------------------------------------------
+  //-------------------------------------------------------------------------------------------------------------------------
+
+  .dark-icon {
+    display: block;
+  }
+
+  .light-icon {
+    display: none;
+  }
+
+  --blend-mode:lighten;
+  --blend-color:hsla(0, 0%, 100%, 0.4);
+  //-------------------------------------------------------------------------------------------------------------------------
+  //------------------------------------------------ BUTTON STYLES A/C UI ---------------------------------------------------
+  //-------------------------------------------------------------------------------------------------------------------------
+
+  @each $name,
+  $color in $colors {
+    .btn-#{$name}-ui {
+      @include button(darken($color, 1%));
+    }
+  }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------- ROOT -----------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+
+:root {
+
+  --shadow-color-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-color: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-color-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-color-smd: 0 7px 10px -2px rgba(0, 0, 0, 0.1),
+    0 3px 5px -1.5px rgba(0, 0, 0, 0.06);
+  --shadow-color-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-color-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-color-2x1: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-color-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-color-none: 0 0 #0000;
+
+  @each $name,
+  $color in $colors {
+    --#{$name}: #{$color};
+    --#{$name}-dark: #{darken($color, 7%)};
+    --#{$name}-light: #{lighten($color, 7%)};
+  }
+
+
+
+  --gradient-1: #fb923c,
+  hsl(333, 71%, 51%);
+  --gradient-2: #a855f7,
+  #6366f1;
+  --gradient-3: #fb923c,
+  #f97316;
+  --gradient-4: #4ade80,
+  hsl(189, 94%, 43%);
+  --gradient-5: #d946ef,
+  #9333ea;
+  --gradient-6: #38bdf8,
+  #6366f1;
+  --gradient-7: #22d3ee,
+  #0ea5e9;
+  --gradient-8: #ec4899,
+  #f43f5e;
+  --gradient-9: #00b09b,
+  #96c93d;
+  --gradient-10: #bef264,
+  #10b981;
+
+  font-family: "Roboto",
+  "Open Sans",
+  "Helvetica Neue",
+  sans-serif;
+
+  --gray0: #f8f8f8;
+  --gray1: #dbe1e8;
+  --gray2: #b2becd;
+  --gray3: #6c7983;
+  --gray4: #454e56;
+  // --gray5: #2a2e35;
+  // --gray6: #12181b;
+  --gray6: hsla(210, 11%, 13%, 1);
+  --gray5: hsl(210, 10%, 18%); // hsl(210, 10%, 21%);
+  //#2f3437;//
+  //rgb(55, 60, 63)
+  --nav-width: 4.375rem;
+
+  a {
+    color: var(--text-color1);
+    text-decoration: none;
+  }
+
+  @media only screen and (max-width: 760px) {
+    --nav-width: 2.8rem;
+    --font-size: 13.5px;
+    --line-height-1: 1.7rem;
+    --line-height-2: 2.3rem;
+    font-size: 13.5px;
+  }
+
+  --font-body: "MyWebFont",
+  sans-serif;
+  --font-head: "MyWebFont",
+  sans-serif;
+  --font-code: "MycodeFont",
+  monospace;
+  --font-size: 16px;
+
+  font-size: 16px;
+
+  --max-width-bp: 768px;
+
+  --orange-pink: linear-gradient(to bottom right,
+    var(--orange-light),
+    var(--orange-dark) 85%);
+
+  --green-grad: linear-gradient(to bottom right,
+    var(--green-light),
+    var(--green-dark) 85%);
+
+  --transition-speed: 0.5s;
+  --line-height-1: 2.3rem;
+  --line-height-2: 3.3rem;
+  @include default-theme;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------ TRANSITION BACKGROUND TIME ---------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+
+.ta {
+  transition: all 0.5s ease;
+}
+
+.tb {
+  transition: all 0.3s ease;
+}
+
+.temp {
+  /* CSS HEX */
+  --cultured: #f8f9faff;
+  --cultured-2: #e9ecefff;
+  --gainsboro: #dee2e6ff;
+  --light-gray: #ced4daff;
+  --cadet-blue-crayola: #adb5bdff;
+  --slate-gray: #6c757dff;
+  --davys-grey: #495057ff;
+  --gunmetal: #343a40ff;
+  --charleston-green: #212529ff;
+
+  /* CSS HSL */
+  --cultured: hsla(210, 17%, 98%, 1);
+  --cultured-2: hsla(210, 16%, 93%, 1);
+  --gainsboro: hsla(210, 14%, 89%, 1);
+  --light-gray: hsla(210, 14%, 83%, 1);
+  --cadet-blue-crayola: hsla(210, 11%, 71%, 1);
+  --slate-gray: hsla(208, 7%, 46%, 1);
+  --davys-grey: hsla(210, 9%, 31%, 1);
+  --gunmetal: hsla(210, 10%, 23%, 1);
+  --charleston-green: hsla(210, 11%, 15%, 1);
+
+  /* SCSS HEX */
+  $cultured: #f8f9faff;
+  $cultured-2: #e9ecefff;
+  $gainsboro: #dee2e6ff;
+  $light-gray: #ced4daff;
+  $cadet-blue-crayola: #adb5bdff;
+  $slate-gray: #6c757dff;
+  $davys-grey: #495057ff;
+  $gunmetal: #343a40ff;
+  $charleston-green: #212529ff;
+
+  /* SCSS HSL */
+  $cultured: hsla(210, 17%, 98%, 1);
+  $cultured-2: hsla(210, 16%, 93%, 1);
+  $gainsboro: hsla(210, 14%, 89%, 1);
+  $light-gray: hsla(210, 14%, 83%, 1);
+  $cadet-blue-crayola: hsla(210, 11%, 71%, 1);
+  $slate-gray: hsla(208, 7%, 46%, 1);
+  $davys-grey: hsla(210, 9%, 31%, 1);
+  $gunmetal: hsla(210, 10%, 23%, 1);
+  $charleston-green: hsla(210, 11%, 15%, 1);
+
+  /* SCSS RGB */
+  $cultured: rgba(248, 249, 250, 1);
+  $cultured-2: rgba(233, 236, 239, 1);
+  $gainsboro: rgba(222, 226, 230, 1);
+  $light-gray: rgba(206, 212, 218, 1);
+  $cadet-blue-crayola: rgba(173, 181, 189, 1);
+  $slate-gray: rgba(108, 117, 125, 1);
+  $davys-grey: rgba(73, 80, 87, 1);
+  $gunmetal: rgba(52, 58, 64, 1);
+  $charleston-green: rgba(33, 37, 41, 1);
+
+  /* SCSS Gradient */
+  $gradient-top: linear-gradient(0deg,
+      #f8f9faff,
+      #e9ecefff,
+      #dee2e6ff,
+      #ced4daff,
+      #adb5bdff,
+      #6c757dff,
+      #495057ff,
+      #343a40ff,
+      #212529ff);
+  $gradient-right: linear-gradient(90deg,
+      #f8f9faff,
+      #e9ecefff,
+      #dee2e6ff,
+      #ced4daff,
+      #adb5bdff,
+      #6c757dff,
+      #495057ff,
+      #343a40ff,
+      #212529ff);
+  $gradient-bottom: linear-gradient(180deg,
+      #f8f9faff,
+      #e9ecefff,
+      #dee2e6ff,
+      #ced4daff,
+      #adb5bdff,
+      #6c757dff,
+      #495057ff,
+      #343a40ff,
+      #212529ff);
+  $gradient-left: linear-gradient(270deg,
+      #f8f9faff,
+      #e9ecefff,
+      #dee2e6ff,
+      #ced4daff,
+      #adb5bdff,
+      #6c757dff,
+      #495057ff,
+      #343a40ff,
+      #212529ff);
+  $gradient-top-right: linear-gradient(45deg,
+      #f8f9faff,
+      #e9ecefff,
+      #dee2e6ff,
+      #ced4daff,
+      #adb5bdff,
+      #6c757dff,
+      #495057ff,
+      #343a40ff,
+      #212529ff);
+  $gradient-bottom-right: linear-gradient(135deg,
+      #f8f9faff,
+      #e9ecefff,
+      #dee2e6ff,
+      #ced4daff,
+      #adb5bdff,
+      #6c757dff,
+      #495057ff,
+      #343a40ff,
+      #212529ff);
+  $gradient-top-left: linear-gradient(225deg,
+      #f8f9faff,
+      #e9ecefff,
+      #dee2e6ff,
+      #ced4daff,
+      #adb5bdff,
+      #6c757dff,
+      #495057ff,
+      #343a40ff,
+      #212529ff);
+  $gradient-bottom-left: linear-gradient(315deg,
+      #f8f9faff,
+      #e9ecefff,
+      #dee2e6ff,
+      #ced4daff,
+      #adb5bdff,
+      #6c757dff,
+      #495057ff,
+      #343a40ff,
+      #212529ff);
+  $gradient-radial: radial-gradient(#f8f9faff,
+      #e9ecefff,
+      #dee2e6ff,
+      #ced4daff,
+      #adb5bdff,
+      #6c757dff,
+      #495057ff,
+      #343a40ff,
+      #212529ff);
+}
+
+.grid-view {
+  display: grid;
+  gap: 3.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 500px));
+  justify-content: space-evenly;
+  padding-top: 5rem;
+
+  .div {
+    padding: 1.2rem;
+    background: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    border-radius: 20px;
+    transition: transform 0.2s;
+    // width:100%;
+    height: fit-content;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    img {
+      border-radius: 10px;
+      //min-height: 0;
+      width: unset !important;
+      height: unset !important;
+      min-width: unset !important;
+      max-width: unset !important;
+      min-height: 90% !important;
+      max-height: unset !important;
+      margin-top: 0 !important;
+      // top: 50% !important;
+      left: 50% !important;
+
+      transform: translateX(-50%) !important;
+
+    }
+
+    .innerdiv {
+      border-radius: 10px;
+    }
+
+  }
+
+  @media only screen and (max-width: 600px) {
+    gap: 1.5rem;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--gray-8);
+}
+
+
+
+
+
+code {
+  color: hsl(348, 100%, 61%);
+  font-family: MyCodeFont;
+  font-weight: 100;
+
+}
