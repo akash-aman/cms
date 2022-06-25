@@ -12,7 +12,7 @@ const SEO = ({ title, description, image, article }) => {
     const titleTemplate = "hola";
     const defaultDescription = "Welcome to offical website of CrispySystem. Find blogs & more development stuffs & Developer Details";
     const siteUrl = "https://crispysystem-frontend.vercel.app";
-    const defaultImage = "/https://raw.githubusercontent.com/akash-aman/content_management_system/main/images/img2.png";
+    const defaultImage = "/img2.png";
     const twitterUsername = "@sirakashaman";
 
 
