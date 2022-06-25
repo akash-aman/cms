@@ -11,7 +11,7 @@ const SEO = ({ title, description, image, article }) => {
     const defaultTitle = "Welcome";
     const titleTemplate = "hola";
     const defaultDescription = "Welcome to offical website of CrispySystem. Find blogs & more development stuffs & Developer Details";
-    const siteUrl = "https://crispysystem-frontend.vercel.app";
+    const siteUrl = "https://content-management-system.vercel.app/";
     const defaultImage = "/img2.png";
     const twitterUsername = "@sirakashaman";
 
