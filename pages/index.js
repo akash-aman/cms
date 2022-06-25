@@ -8,6 +8,7 @@ import { PageProvider, PageContext } from "@/context/pageContext"
 import { useTransition, animated } from 'react-spring';
 import PostOptions from '@/component/PostOptions';
 import { useAuth } from '@/context/authContext'
+import SEO from "../component/SEO"
 
 const Catalog = ({ data, totalPage }) => {
 
@@ -24,6 +25,7 @@ const Catalog = ({ data, totalPage }) => {
     (styles, item) => item &&
 
       <Layout>
+        <SEO />
         <animated.div className="grid-view" style={styles}>
 
           {data.map((item, index) => (<div key={index} className="div">
